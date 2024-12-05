@@ -278,7 +278,15 @@ C--------------- PARAMETERS FOR THE NUCLEAR POTENTIAL
                 R0=0.95D0*(AP**(1.D0/3.D0)+AT**(1.D0/3.D0))
                 A0=1.05D0
                         READ(10,*)V0,R0,A0
-	                R0=R0*(AP**(1.D0/3.D0)+AT**(1.D0/3.D0))
+                        r1=1.20*ap**(1.D0/3.D0)-0.09
+                        r2=1.20*at**(1.D0/3.D0)-0.09
+                        A0=1.17*(1.+0.53*(AP**(-1.D0/3.D0)+AT**(-1.D0/3.D0)))
+                        A0=1.D0/A0
+                        R0=(r1+r2)
+                        R12=r1*r2/(r1+r2)
+                        GAMMA=0.95D0*(1.D0-1.8D0*(AP-2.D0*ZP)/AP*(AT-2.D0*ZT)/AT)
+                        V0=16.D0*PI*GAMMA*R12*A0
+!                R0=R0*(AP**(1.D0/3.D0)+AT**(1.D0/3.D0))
                         READ(10,*)W0,RW,AW
 	                RW=RW*(AP**(1.D0/3.D0)+AT**(1.D0/3.D0))
                         READ(10,*)W0S,RWS,AWS
