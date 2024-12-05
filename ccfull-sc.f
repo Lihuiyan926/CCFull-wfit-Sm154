@@ -265,27 +265,33 @@ C
       intrans(1)=in1
 
 C--------------- PARAMETERS FOR THE NUCLEAR POTENTIAL
-              R1=1.233D0*AP**(1.D0/3.D0)-0.98D0*AP**(-1.D0/3.D0)
-              R2=1.233D0*AT**(1.D0/3.D0)-0.98D0*AT**(-1.D0/3.D0)
-              R0=R1+R2+0.29D0
-              R12=R1*R2/(R1+R2)
-              A0=0.63D0
-              GAMMA=0.95D0*(1.D0-1.8D0*(AP-2.D0*ZP)/AP*(AT-2.D0*ZT)/AT)
-              V0=16.D0*PI*GAMMA*R12*A0
-              V0=31.67*R1*R2/(R1+R2)
-
-                V0=1551D0
-                R0=0.95D0*(AP**(1.D0/3.D0)+AT**(1.D0/3.D0))
-                A0=1.05D0
+!             R1=1.233D0*AP**(1.D0/3.D0)-0.98D0*AP**(-1.D0/3.D0)
+!             R2=1.233D0*AT**(1.D0/3.D0)-0.98D0*AT**(-1.D0/3.D0)
+!             R0=R1+R2+0.29D0
+!             R12=R1*R2/(R1+R2)
+!             A0=0.63D0
+!             GAMMA=0.95D0*(1.D0-1.8D0*(AP-2.D0*ZP)/AP*(AT-2.D0*ZT)/AT)
+!             V0=16.D0*PI*GAMMA*R12*A0
+!             V0=31.67*R1*R2/(R1+R2)
+!!               V0=1551D0
+!               R0=0.95D0*(AP**(1.D0/3.D0)+AT**(1.D0/3.D0))
+!               A0=1.05D0
+! MODIFIED BY lihuiyan 2024-12-05
                         READ(10,*)V0,R0,A0
-                        r1=1.20*ap**(1.D0/3.D0)-0.09
-                        r2=1.20*at**(1.D0/3.D0)-0.09
-                        A0=1.17*(1.+0.53*(AP**(-1.D0/3.D0)+AT**(-1.D0/3.D0)))
-                        A0=1.D0/A0
-                        R0=(r1+r2)
-                        R12=r1*r2/(r1+r2)
-                        GAMMA=0.95D0*(1.D0-1.8D0*(AP-2.D0*ZP)/AP*(AT-2.D0*ZT)/AT)
-                        V0=16.D0*PI*GAMMA*R12*A0
+                     r1=1.20*AP**(1.D0/3.D0)-0.09
+                     r2=1.20*AT**(1.D0/3.D0)-0.09
+                     atemp1 = AP ** (-1.D0 / 3.D0)
+                     atemp2 = AT ** (-1.D0 / 3.D0)
+                     A0 = 1.17 * (1.0 + 0.53 * (atemp1 + atemp2))
+                     A0=1.D0/A0
+                     R0=(r1+r2)
+                     R12=r1*r2/(r1+r2)
+                     temp1 = AP - 2.D0 * ZP
+                     temp2 = AT - 2.D0 * ZT
+                     term1 = temp1 / AP
+                     term2 = temp2 / AT
+                     GAMMA = 0.95D0 * (1.D0 - 1.8D0 * term1 * term2)
+                     V0=16.D0*PI*GAMMA*R12*A0
 !                R0=R0*(AP**(1.D0/3.D0)+AT**(1.D0/3.D0))
                         READ(10,*)W0,RW,AW
 	                RW=RW*(AP**(1.D0/3.D0)+AT**(1.D0/3.D0))
